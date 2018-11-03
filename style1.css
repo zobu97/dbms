@@ -14,6 +14,14 @@ input[type=text], input[type=password]{
 } 
 
 input[type=submit]{
-  padding:5px;
-  border-radius:10px;
+  /* padding:5px;
+  border-radius:10px; */
+  /* background-color: #ffa726;
+    color: white; */
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	border-radius: 10px;
+
 }

@@ -42,14 +42,14 @@ li a:hover:not(.active) {
 <body>
 
 <ul>
- <li><a href="customer_13221.php">CUSTOMER</a></li>
+ <li><a href="salesorder_13221.php">SALESORDER</a></li>
   <li><a href="salesperson13221.php">SALESPERSON</a></li>
   <li><a href="product13221.php">PRODUCT</a></li>
   <li><a href="user13221.php">USER</a></li>
-  <li style = "float:right;"><a href="navigationpg.php">MENU</a></li>
+  <li style = "float:right;"><a href="home.php">MENU</a></li>
 </ul>
  
-        <title>SALES ORDER</title>  
+        <title>CUSTOMER</title>  
 		<link rel="stylesheet" href="jquery-ui.css">
         <link rel="stylesheet" href="bootstrap.min.css" />
 		<script src="jquery.min.js"></script>  
@@ -63,7 +63,7 @@ li a:hover:not(.active) {
         <div class="container">
 			<br />
 			
-			<h3 align="center" style="color: #ef6c00">SALESORDER</a></h3><br />
+			<h3 align="center" style="color: #ef6c00">CUSTOMER</a></h3><br />
 			<!-- <h1 style="color: #ef6c00">Product</h1> -->
 			<br />
 			<div align="right" style="margin-bottom:15px">
@@ -79,40 +79,36 @@ li a:hover:not(.active) {
 		<div id="user_dialog" title="Add Data">
 			<form method="post" id="user_form">
 				<div class="form-group">
-					<label>Enter Customer ID</label>
-					<input type="text" name="CID" id="CID" class="form-control" />
-					<span id="error_CID" class="text-danger"></span>
+					<label>Enter Shop Name</label>
+					<input type="text" name="SNAME" id="SNAME" class="form-control" />
+					<span id="error_SNAME" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter Sales Date</label>
-					<input type="text" name="SDATE" id="SDATE" class="form-control" />
-					<span id="error_SDATE" class="text-danger"></span>
+					<label>Enter Customer Name</label>
+					<input type="text" name="CNAME" id="CNAME" class="form-control" />
+					<span id="error_CNAME" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter SalesPerson Name</label>
-					<input type="text" name="SName" id="SName" class="form-control" />
-					<span id="error_SName" class="text-danger"></span>
+					<label>Enter Customer Number</label>
+					<input type="text" name="CNUMBER" id="CNUMBER" class="form-control" />
+					<span id="error_CNUMBER" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter Product Code</label>
-					<input type="text" name="PCODE" id="PCODE" class="form-control" />
-					<span id="error_PCODE" class="text-danger"></span>
+					<label>Enter Address</label>
+					<input type="text" name="ADDRESS" id="ADDRESS" class="form-control" />
+					<span id="error_ADDRESS" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter Quantity</label>
-					<input type="text" name="QUANTITY" id="QUANTITY" class="form-control" />
-					<span id="error_QUANTITY" class="text-danger"></span>
+					<label>Enter Area</label>
+					<input type="text" name="AREA" id="AREA" class="form-control" />
+					<span id="error_AREA" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter Rate</label>
-					<input type="text" name="RATE" id="RATE" class="form-control" />
-					<span id="error_RATE" class="text-danger"></span>
+					<label>Enter Coordinates</label>
+					<input type="text" name="COORDINATES" id="COORDINATES" class="form-control" />
+					<span id="error_COORDINATES" class="text-danger"></span>
 				</div>
-				<div class="form-group">
-					<label>Enter Amount</label>
-					<input type="text" name="AMOUNT" id="AMOUNT" class="form-control" />
-					<span id="error_AMOUNT" class="text-danger"></span>
-				</div>
+		
 				<div class="form-group">
 					<input type="hidden" name="action" id="action" value="insert" />
 					<input type="hidden" name="hidden_id" id="hidden_id" />
@@ -143,7 +139,7 @@ $(document).ready(function(){
 	function load_data()
 	{
 		$.ajax({
-			url:"fetch.php",
+			url:"fetchcustomer.php",
 			method:"POST",
 			success:function(data)
 			{
@@ -168,98 +164,86 @@ $(document).ready(function(){
 	
 	$('#user_form').on('submit', function(event){
 		event.preventDefault();
-		var error_CID = '';
-		var error_SDATE = '';
-		var error_SName = '';
-		var error_PCODE = '';
-		var error_QUANTITY = '';
-		var error_RATE = '';
-		var error_AMOUNT = '';
-		if($('#CID').val() == '')
+		var error_SNAME = '';
+		var error_CNAME = '';
+		var error_CNUMBER = '';
+		var error_ADDRESS = '';
+		var error_AREA = '';
+		var error_COORDINATES = '';
+		if($('#SNAME').val() == '')
 		{
-			error_CID = 'Customer ID is required';
-			$('#error_CID').text(error_CID);
-			$('#CID').css('border-color', '#cc0000');
+			error_SNAME = 'Shop Name is required';
+			$('#error_SNAME').text(error_SNAME);
+			$('#SNAME').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_CID = '';
-			$('#error_CID').text(error_CID);
-			$('#CID').css('border-color', '');
+			error_SNAME = '';
+			$('#error_SNAME').text(error_SNAME);
+			$('#SNAME').css('border-color', '');
 		}
-		if($('#SDATE').val() == '')
+		if($('#CNAME').val() == '')
 		{
-			error_SDATE = 'Sales Date is required';
-			$('#error_SDATE').text(error_SDATE);
-			$('#SDATE').css('border-color', '#cc0000');
+			error_CNAME = 'Customer Name is required';
+			$('#error_CNAME').text(error_CNAME);
+			$('#CNAME').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_SDATE = '';
-			$('#error_SDATE').text(error_SDATE);
-			$('#SDATE').css('border-color', '');
+			error_CNAME = '';
+			$('#error_CNAME').text(error_CNAME);
+			$('#CNAME').css('border-color', '');
 		}
-		if($('#SName').val() == '')
+		if($('#CNUMBER').val() == '')
 		{
-			error_SName = 'Sales Person Name is required';
-			$('#error_SName').text(error_SName);
-			$('#SName').css('border-color', '#cc0000');
+			error_CNUMBER = 'Customer Number is required';
+			$('#error_CNUMBER').text(error_CNUMBER);
+			$('#CNUMBER').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_SName = '';
-			$('#error_SName').text(error_SName);
-			$('#SName').css('border-color', '');
+			error_CNUMBER = '';
+			$('#error_CNUMBER').text(error_CNUMBER);
+			$('#CNUMBER').css('border-color', '');
 		}
-		if($('#PCODE').val() == '')
+		if($('#ADDRESS').val() == '')
 		{
-			error_PCODE = 'Product Code is required';
-			$('#error_PCODE').text(error_PCODE);
-			$('#PCODE').css('border-color', '#cc0000');
+			error_ADDRESS = 'Customer Address is required';
+			$('#error_ADDRESS').text(error_ADDRESS);
+			$('#ADDRESS').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_PCODE = '';
-			$('#error_PCODE').text(error_PCODE);
-			$('#PCODE').css('border-color', '');
+			error_ADDRESS = '';
+			$('#error_ADDRESS').text(error_ADDRESS);
+			$('#ADDRESS').css('border-color', '');
 		}
-		if($('#QUANTITY').val() == '')
+		if($('#AREA').val() == '')
 		{
-			error_QUANTITY = 'Quantity is required';
-			$('#error_QUANTITY').text(error_QUANTITY);
-			$('#QUANTITY').css('border-color', '#cc0000');
+			error_AREA = 'Area is required';
+			$('#error_AREA').text(error_AREA);
+			$('#AREA').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_QUANTITY = '';
-			$('#error_QUANTITY').text(error_QUANTITY);
-			$('#QUANTITY').css('border-color', '');
+			error_AREA = '';
+			$('#error_AREA').text(error_AREA);
+			$('#AREA').css('border-color', '');
 		}
-		if($('#RATE').val() == '')
+		if($('#COORDINATES').val() == '')
 		{
-			error_RATE = 'Rate is required';
-			$('#error_RATE').text(error_RATE);
-			$('#RATE').css('border-color', '#cc0000');
+			error_COORDINATES = 'Coordinates are required';
+			$('#error_COORDINATES').text(error_COORDINATES);
+			$('#COORDINATES').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_RATE = '';
-			$('#error_RATE').text(error_RATE);
-			$('#RATE').css('border-color', '');
+			error_COORDINATES = '';
+			$('#error_COORDINATES').text(error_COORDINATES);
+			$('#COORDINATES').css('border-color', '');
 		}
-		if($('#AMOUNT').val() == '')
-		{
-			error_AMOUNT = 'Amount is required';
-			$('#error_AMOUNT').text(error_AMOUNT);
-			$('#AMOUNT').css('border-color', '#cc0000');
-		}
-		else
-		{
-			error_AMOUNT = '';
-			$('#error_AMOUNT').text(error_AMOUNT);
-			$('#AMOUNT').css('border-color', '');
-		}
-		if(error_CID != '' || error_SDATE != '' || error_SName != '' || error_PCODE != '' || error_QUANTITY != '' || error_RATE != '' || error_AMOUNT != '')
+		
+		if(error_SNAME != '' || error_CNAME != '' || error_CNUMBER != '' || error_ADDRESS != '' || error_AREA != '' || error_COORDINATES != '')
 		{
 			return false;
 		}
@@ -268,7 +252,7 @@ $(document).ready(function(){
 			$('#form_action').attr('disabled', 'disabled');
 			var form_data = $(this).serialize();
 			$.ajax({
-				url:"action.php",
+				url:"actioncustomer.php",
 				method:"POST",
 				data:form_data,
 				success:function(data)
@@ -289,25 +273,24 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '.edit', function(){
-		var id = $(this).attr('id');
+		var CID = $(this).attr('CID');
 		var action = 'fetch_single';
 		$.ajax({
-			url:"action.php",
+			url:"actioncustomer.php",
 			method:"POST",
-			data:{id:id, action:action},
+			data:{CID:CID, action:action},
 			dataType:"json",
 			success:function(data)
 			{
-				$('#CID').val(data.CID);
-				$('#SDATE').val(data.SDATE);
-				$('#SName').val(data.SName);
-				$('#PCODE').val(data.PCODE);
-				$('#QUANTITY').val(data.QUANTITY);
-				$('#RATE').val(data.RATE);
-				$('#AMOUNT').val(data.AMOUNT);
+				$('#SNAME').val(data.SNAME);
+				$('#CNAME').val(data.CNAME);
+				$('#CNUMBER').val(data.CNUMBER);
+				$('#ADDRESS').val(data.ADDRESS);
+				$('#AREA').val(data.AREA);
+				$('#COORDINATES').val(data.COORDINATES);
 				$('#user_dialog').attr('title', 'Edit Data');
 				$('#action').val('update');
-				$('#hidden_id').val(id);
+				$('#hidden_id').val(CID);
 				$('#form_action').val('Update');
 				$('#user_dialog').dialog('open');
 			}
@@ -319,12 +302,12 @@ $(document).ready(function(){
 		modal: true,
 		buttons:{
 			Ok : function(){
-				var id = $(this).data('id');
+				var CID = $(this).data('CID');
 				var action = 'delete';
 				$.ajax({
-					url:"action.php",
+					url:"actioncustomer.php",
 					method:"POST",
-					data:{id:id, action:action},
+					data:{CID:CID, action:action},
 					success:function(data)
 					{
 						$('#delete_confirmation').dialog('close');
@@ -341,8 +324,8 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '.delete', function(){
-		var id = $(this).attr("id");
-		$('#delete_confirmation').data('id', id).dialog('open');
+		var CID = $(this).attr("CID");
+		$('#delete_confirmation').data('CID', CID).dialog('open');
 	});
 	
 });  

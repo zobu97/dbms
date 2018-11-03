@@ -52,7 +52,7 @@ li a:hover:not(.active) {
 <body>
 <div align="center">
 <ul>
- <li><a href="customer13221.php">CUSTOMER</a></li>
+ <li><a href="customer_13221.php">CUSTOMER</a></li>
   <li><a href="salesperson13221.php">SALESPERSON</a></li>
   <li><a href="product13221.php">PRODUCT</a></li>
   <li><a href="user13221.php">USER</a></li>

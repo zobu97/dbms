@@ -38,7 +38,7 @@
    <body>
       <div align = "center">
          <div>
-            <div  style="margin-top:200px;border:2px solid #FF5722;"> 
+            <div  style="margin-top:200px;"> 
             <h1 style="background:black;width:25%;color:FF5722;border-radius: 10px 10px 0px 0px;">LOGIN</h1>
             <form action = "" method = "post">
                   <label>User Name</label><br>
@@ -47,7 +47,7 @@
                   <input type = "password" name = "password" class = "box" autocomplete="off"/><br/><br />
                   <input type = "submit" value = " Submit "/><br />
                </form>
-               <div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
+               <div style = "font-size:15px; font-weight: bold; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
             </div>
 
          </div>
