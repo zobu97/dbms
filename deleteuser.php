@@ -4,6 +4,7 @@ $UserID = $_GET['UserID'];
 $query ="DELETE FROM User WHERE UserID='$UserID'";
 $data = mysqli_query($conn, $query);
 if ($data) 
+// dgjdsf
 {
 	echo "<script>alert('Record Deleted')</script>";
 ?>
