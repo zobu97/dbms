@@ -1,49 +1,20 @@
-<?php
-
-$con = mysqli_connect('localhost','root');
-
-if(!$con)
-{
-
-echo 'Not Connected to the Server';
-
-}
-
-if (!mysqli_select_db($con,'ZubiaHabib'))
-{
-
-
-echo 'Database not Selected';
-
-}
-
-$UserID=$_POST['UserID'];
-$PASSWORD=$_POST['PASSWORD'];
-
-$result= mysqli_query($con,"select * from user where UserID='$UserID' and PASSWORD='$PASSWORD'");
-
-
-$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-if($row['UserID'] ==$UserID and $row['PASSWORD'] ==$PASSWORD){
-	//echo"login sucessful! Welcome";
-}
-else{
-echo"failed to login";
-
-
-}
-
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-<h1 style="color: #ef6c00">Welcome User</h1>
+<title>Homepage</title>
+<!-- <h1>Welcome <?php //echo $login_session; ?></h1>  -->
+<p style="font-weight:bold;text-align:center;font-size:50px;color: #ef6c00; padding-left:5px">Zu-PAINTS</p>
+
 <style>
+body{
+    background-color: #333;
+    text-align: center;
+    font-family: Arial;
+
+}
 ul {
+    border-radius:5px;
+    width:10%;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -52,12 +23,13 @@ ul {
 }
 
 li {
-    float: left;
-    border-right:1px solid #bbb;
+    
+    /* float: left; */
+    /* border-right:px solid #bbb; */
 }
 
 li:last-child {
-    border-right: none;
+    /* border-right: none; */
 }
 
 li a {
@@ -71,22 +43,27 @@ li a {
 li a:hover:not(.active) {
     background-color: #ef6c00;
 }
-
 .active {
     background-color: #4CAF50;
 }
+
 </style>
 </head>
 <body>
-
+<div align="center">
 <ul>
  <li><a href="customer13221.php">CUSTOMER</a></li>
   <li><a href="salesperson13221.php">SALESPERSON</a></li>
   <li><a href="product13221.php">PRODUCT</a></li>
   <li><a href="user13221.php">USER</a></li>
   <li><a href="salesorder_13221.php">SALESORDER</a></li>
+
+  <!-- <li style="float:right"><a href = "Login/logout.php">Sign Out</a></li> -->
+  <li style="padding-top:50px;"><a href = "Login/logout.php">SIGN OUT</a></li>
+
 </ul>
+
+</div>
 
 </body>
 </html>
-
