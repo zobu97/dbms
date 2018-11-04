@@ -8,7 +8,7 @@
       $myusername = mysqli_real_escape_string($conn,$_POST['username']);
       $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
       
-      $sql = "SELECT UserID, ACTIVE FROM user WHERE UserID = '$myusername' and PASSWORD = '$mypassword'";
+      $sql = "SELECT UserID, ACTIVE, SALESPERSON FROM user WHERE binary UserID = '$myusername' and binary PASSWORD = '$mypassword'";
      
       $result = mysqli_query($conn,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);

@@ -46,7 +46,9 @@ li a:hover:not(.active) {
   <li><a href="salesperson13221.php">SALESPERSON</a></li>
   <li><a href="product13221.php">PRODUCT</a></li>
   <li><a href="user13221.php">USER</a></li>
-  <li style = "float:right;"><a href="navigationpg.php">MENU</a></li>
+  
+  <li style = "float:right;"><a href="/Login/login.php">LOGOUT</a></li>
+  <li style = "float:right;"><a href="home.php">MENU</a></li>
 </ul>
  
         <title>SALES ORDER</title>  

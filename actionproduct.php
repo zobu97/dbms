@@ -2,21 +2,19 @@
 
 //action.php
 
-include('customerconnection.php');
+include('productconnection.php');
 error_reporting(0);
 
 if(isset($_POST["action"]))
 {
 	if($_POST["action"] == "Insert")
 	{
-		
-		$CID = $_POST['CID'];
-		$SNAME = $_POST['SNAME'];
-		$CNAME = $_POST['CNAME'];
-		$CNUMBER = $_POST['CNUMBER'];
-		$ADDRESS = $_POST['ADDRESS'];
-		$AREA = $_POST['AREA'];
-		$COORDINATES = $_POST['COORDINATES'];
+		$PCODE = $_POST['PCODE'];
+		$BRAND = $_POST['BRAND'];
+		$TYPE = $_POST['TYPE'];
+		$SHADE = $_POST['SHADE'];
+		$SIZE = $_POST['SIZE'];
+		$SALESPRICE = $_POST['SALESPRICE'];
 
 		// $CID = 13;
 		// $SDATE = '2018-04-07';
@@ -29,7 +27,7 @@ if(isset($_POST["action"]))
 		// INSERT INTO salesorder (CID, SDATE, SName, PCODE, QUANTITY, RATE, AMOUNT) VALUES (".$_POST["CID"].", ".$_POST["SDATE"].", ".$_POST["SName"].", ".$_POST["PCODE"].", ".$_POST["QUANTITY"].", ".$_POST["RATE"].", ".$_POST["AMOUNT"].")
 		// ;
 
-		$query = "INSERT INTO customer VALUES ('$CID' , '$SNAME' , '$CNAME' , '$CNUMBER' , '$ADDRESS' , '$AREA' , '$COORDINATES')";
+		$query = "INSERT INTO product VALUES ('$PCODE' , '$BRAND' , '$TYPE' , '$SHADE' , '$SIZE' , '$SALESPRICE')";
 
 		$statement = $connect->prepare($query);
 		$statement->execute();
@@ -38,34 +36,31 @@ if(isset($_POST["action"]))
 	if($_POST["action"] == "fetch_single")
 	{
 		$query = "
-		SELECT * FROM customer WHERE CID = '".$_POST["CID"]."'
+		SELECT * FROM product WHERE PCODE = '".$_POST["PCODE"]."'
 		";
 		$statement = $connect->prepare($query);
 		$statement->execute();
 		$result = $statement->fetchAll();
 		foreach($result as $row)
 		{
-			$output['SNAME'] = $row['SNAME'];
-			$output['CNAME'] = $row['CNAME'];
-			$output['CNUMBER'] = $row['CNUMBER'];
-			$output['ADDRESS'] = $row['ADDRESS'];
-			$output['AREA'] = $row['AREA'];
-			$output['COORDINATES'] = $row['COORDINATES'];
-		
+			$output['BRAND'] = $row['BRAND'];
+			$output['TYPE'] = $row['TYPE'];
+			$output['SHADE'] = $row['SHADE'];
+			$output['SIZE'] = $row['SIZE'];
+			$output['SALESPRICE'] = $row['SALESPRICE'];
 		}
 		echo json_encode($output);
 	}
 	if($_POST["action"] == "update")
 	{
 		$query = "
-		UPDATE customer
-		SET SNAME = '".$_POST["SNAME"]."', 
-		CNAME = '".$_POST["CNAME"]."' , 
-		CNUMBER = '".$_POST["CNUMBER"]."' , 
-		ADDRESS = '".$_POST["ADDRESS"]."' , 
-		AREA = '".$_POST["AREA"]."' , 
-		COORDINATES = '".$_POST["COORDINATES"]."' , 
-		WHERE CID = '".$_POST["hidden_CID"]."'
+		UPDATE product
+		SET BRAND = '".$_POST["BRAND"]."', 
+		TYPE = '".$_POST["TYPE"]."' , 
+		SHADE = '".$_POST["SHADE"]."' , 
+		SIZE = '".$_POST["SIZE"]."' , 
+		SALESPRICE = '".$_POST["SALESPRICE"]."' , 
+		WHERE PCODE = '".$_POST["hidden_PCODE"]."'
 		";
 		$statement = $connect->prepare($query);
 		$statement->execute();
@@ -73,7 +68,7 @@ if(isset($_POST["action"]))
 	}
 	if($_POST["action"] == "delete")
 	{
-		$query = "DELETE FROM customer WHERE CID = '".$_POST["CID"]."'";
+		$query = "DELETE FROM product WHERE PCODE = '".$_POST["PCODE"]."'";
 		$statement = $connect->prepare($query);
 		$statement->execute();
 		echo '<p>Data Deleted</p>';

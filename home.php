@@ -53,13 +53,13 @@ li a:hover:not(.active) {
 <div align="center">
 <ul>
  <li><a href="customer_13221.php">CUSTOMER</a></li>
-  <li><a href="salesperson13221.php">SALESPERSON</a></li>
-  <li><a href="product13221.php">PRODUCT</a></li>
-  <li><a href="user13221.php">USER</a></li>
+  <li><a href="salesperson_13221.php">SALESPERSON</a></li>
+  <li><a href="product_13221.php">PRODUCT</a></li>
+  <li><a href="user_13221.php">USER</a></li>
   <li><a href="salesorder_13221.php">SALESORDER</a></li>
 
   <!-- <li style="float:right"><a href = "Login/logout.php">Sign Out</a></li> -->
-  <li style="padding-top:50px;"><a href = "Login/logout.php">SIGN OUT</a></li>
+  <li style="padding-top:50px;"><a href = "Login/logout.php">LOGOUT</a></li>
 
 </ul>
 

@@ -4,12 +4,15 @@
 
 include("customerconnection.php");
 
+
 $query = "SELECT * FROM customer";
 $statement = $connect->prepare($query);
 $statement->execute();
 $result = $statement->fetchAll();
 $total_row = $statement->rowCount();
 $output = '
+
+
 <table class="table table-striped table-bordered">
 	<tr>
 		<th>CUSTOMER ID</th>

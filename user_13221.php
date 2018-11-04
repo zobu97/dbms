@@ -42,22 +42,38 @@ li a:hover:not(.active) {
 <body>
 
 <ul>
- <li><a href="salesorder_13221.php">SALESORDER</a></li>
+ <li><a href="customer_13221.php">CUSTOMER</a></li>
   <li><a href="salesperson_13221.php">SALESPERSON</a></li>
+  <li><a href="salesorder_13221.php">SALESORDER</a></li>
   <li><a href="product_13221.php">PRODUCT</a></li>
-  <li><a href="user_13221.php">USER</a></li>
   
   <li style = "float:right;"><a href="/Login/login.php">LOGOUT</a></li>
   <li style = "float:right;"><a href="home.php">MENU</a></li>
 </ul>
  
-        <title>CUSTOMER</title>  
+        <title>USER</title>  
 		<link rel="stylesheet" href="jquery-ui.css">
         <link rel="stylesheet" href="bootstrap.min.css" />
 		<script src="jquery.min.js"></script>  
 		<script src="jquery-ui.js"></script>
 		<!-- <link rel="stylesheet" type="text/css" href="style1.css"> -->
+        <script>
+        var ajax_c = new XMLHttpRequest();
+				var method_c = "GET";
+				var async_c = true;
+				var url_c = "/SName/salesperson_13221.php";
 
+				ajax_c.open(method_c, url_c, async_c);
+				ajax_c.send();
+
+				ajax_c.onreadystatechange = function(){
+				if(this.readyState == 4  && this.status == 200){
+					var data = JSON.parse(this.responseText);
+					for(var a= 0; a< data.length; a++){
+						$('#SName').append('<option SPERSONID="' + data[a].SPERSONID + '">' + data[a].SPERSONID+'</option>');
+					}
+					
+				}}; </script>
 
 		
     </head>  
@@ -65,7 +81,7 @@ li a:hover:not(.active) {
         <div class="container">
 			<br />
 			
-			<h3 align="center" style="color: #ef6c00">CUSTOMER</a></h3><br />
+			<h3 align="center" style="color: #ef6c00">USER</a></h3><br />
 			<!-- <h1 style="color: #ef6c00">Product</h1> -->
 			<br />
 			<div align="right" style="margin-bottom:15px">
@@ -81,39 +97,34 @@ li a:hover:not(.active) {
 		<div id="user_dialog" title="Add Data">
 			<form method="post" id="user_form">
 				<div class="form-group">
-					<label>Enter Shop Name</label>
-					<input type="text" name="SNAME" id="SNAME" class="form-control" />
-					<span id="error_SNAME" class="text-danger"></span>
+					<label>Enter USERNAME</label>
+					<input type="text" name="USERNAME" id="USERNAME" class="form-control" />
+					<span id="error_USERNAME" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter Customer Name</label>
-					<input type="text" name="CNAME" id="CNAME" class="form-control" />
-					<span id="error_CNAME" class="text-danger"></span>
+					<label>Enter Password</label>
+					<input type="text" name="PASSWORD" id="PASSWORD" class="form-control" />
+					<span id="error_PASSWORD" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter Customer Number</label>
-					<input type="text" name="CNUMBER" id="CNUMBER" class="form-control" />
-					<span id="error_CNUMBER" class="text-danger"></span>
+					<label>Select if Active</label>
+					<!-- <input type="text" name="ACTIVE" id="ACTIVE" class="form-control" /> -->
+                    <select name="ACTIVE" id="ACTIVE" class="form-control">
+                    <option value="YES">YES</option>  
+                    <option value="NO">NO</option>
+                    </select>
+					<span id="error_ACTIVE" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<label>Enter Address</label>
-					<input type="text" name="ADDRESS" id="ADDRESS" class="form-control" />
-					<span id="error_ADDRESS" class="text-danger"></span>
+					<label>Enter Salesperson</label>
+					<!-- <input type="text" name="SALESPERSON" id="SALESPERSON" class="form-control" /> -->
+                    <td><select id="SName"><option></option></select required></td>
+					<span id="error_SName" class="text-danger"></span>
 				</div>
-				<div class="form-group">
-					<label>Enter Area</label>
-					<input type="text" name="AREA" id="AREA" class="form-control" />
-					<span id="error_AREA" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<label>Enter Coordinates</label>
-					<input type="text" name="COORDINATES" id="COORDINATES" class="form-control" />
-					<span id="error_COORDINATES" class="text-danger"></span>
-				</div>
-		
+				
 				<div class="form-group">
 					<input type="hidden" name="action" id="action" value="insert" />
-					<input type="hidden" name="hidden_CID" id="hidden_CID" />
+					<input type="hidden" name="hidden_UserID" id="hidden_UserID" />
 					<input type="submit" name="form_action" id="form_action" class="btn btn-info" value="Insert" />
 				</div>
 			</form>
@@ -141,7 +152,7 @@ $(document).ready(function(){
 	function load_data()
 	{
 		$.ajax({
-			url:"fetchcustomer.php",
+			url:"fetchuser.php",
 			method:"POST",
 			success:function(data)
 			{
@@ -166,86 +177,61 @@ $(document).ready(function(){
 	
 	$('#user_form').on('submit', function(event){
 		event.preventDefault();
-		var error_SNAME = '';
-		var error_CNAME = '';
-		var error_CNUMBER = '';
-		var error_ADDRESS = '';
-		var error_AREA = '';
-		var error_COORDINATES = '';
-		if($('#SNAME').val() == '')
+		var error_USERNAME = '';
+		var error_PASSWORD = '';
+		var error_ACTIVE = '';
+		var error_SName = '';
+		if($('#USERNAME').val() == '')
 		{
-			error_SNAME = 'Shop Name is required';
-			$('#error_SNAME').text(error_SNAME);
-			$('#SNAME').css('border-color', '#cc0000');
+			error_USERNAME = 'USERNAME is required';
+			$('#error_USERNAME').text(error_USERNAME);
+			$('#USERNAME').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_SNAME = '';
-			$('#error_SNAME').text(error_SNAME);
-			$('#SNAME').css('border-color', '');
+			error_USERNAME = '';
+			$('#error_USERNAME').text(error_USERNAME);
+			$('#USERNAME').css('border-color', '');
 		}
-		if($('#CNAME').val() == '')
+		if($('#PASSWORD').val() == '')
 		{
-			error_CNAME = 'Customer Name is required';
-			$('#error_CNAME').text(error_CNAME);
-			$('#CNAME').css('border-color', '#cc0000');
-		}
-		else
-		{
-			error_CNAME = '';
-			$('#error_CNAME').text(error_CNAME);
-			$('#CNAME').css('border-color', '');
-		}
-		if($('#CNUMBER').val() == '')
-		{
-			error_CNUMBER = 'Customer Number is required';
-			$('#error_CNUMBER').text(error_CNUMBER);
-			$('#CNUMBER').css('border-color', '#cc0000');
+			error_PASSWORD = 'PASSWORD is required';
+			$('#error_PASSWORD').text(error_PASSWORD);
+			$('#PASSWORD').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_CNUMBER = '';
-			$('#error_CNUMBER').text(error_CNUMBER);
-			$('#CNUMBER').css('border-color', '');
+			error_PASSWORD = '';
+			$('#error_PASSWORD').text(error_PASSWORD);
+			$('#PASSWORD').css('border-color', '');
 		}
-		if($('#ADDRESS').val() == '')
+		if($('#ACTIVE').val() == '')
 		{
-			error_ADDRESS = 'Customer Address is required';
-			$('#error_ADDRESS').text(error_ADDRESS);
-			$('#ADDRESS').css('border-color', '#cc0000');
-		}
-		else
-		{
-			error_ADDRESS = '';
-			$('#error_ADDRESS').text(error_ADDRESS);
-			$('#ADDRESS').css('border-color', '');
-		}
-		if($('#AREA').val() == '')
-		{
-			error_AREA = 'Area is required';
-			$('#error_AREA').text(error_AREA);
-			$('#AREA').css('border-color', '#cc0000');
+			error_ACTIVE = 'ACTIVE STATUS is required';
+			$('#error_ACTIVE').text(error_ACTIVE);
+			$('#ACTIVE').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_AREA = '';
-			$('#error_AREA').text(error_AREA);
-			$('#AREA').css('border-color', '');
+			error_ACTIVE = '';
+			$('#error_ACTIVE').text(error_ACTIVE);
+			$('#ACTIVE').css('border-color', '');
 		}
-		if($('#COORDINATES').val() == '')
+		if($('#SName').val() == '')
 		{
-			error_COORDINATES = 'Coordinates are required';
-			$('#error_COORDINATES').text(error_COORDINATES);
-			$('#COORDINATES').css('border-color', '#cc0000');
+			error_SName = 'SALESPERSON is required';
+			$('#error_SName').text(error_SName);
+			$('#SName').css('border-color', '#cc0000');
 		}
 		else
 		{
-			error_COORDINATES = '';
-			$('#error_COORDINATES').text(error_COORDINATES);
-			$('#COORDINATES').css('border-color', '');
+			error_SName = '';
+			$('#error_SName').text(error_SALESPERSON);
+			$('#SName').css('border-color', '');
 		}
 		
-		if(error_SNAME != '' || error_CNAME != '' || error_CNUMBER != '' || error_ADDRESS != '' || error_AREA != '' || error_COORDINATES != '')
+		
+		if(error_USERNAME != '' || error_PASSWORD != '' || error_ACTIVE != '' || error_SName != '')
 		{
 			return false;
 		}
@@ -254,7 +240,7 @@ $(document).ready(function(){
 			$('#form_action').attr('disabled', 'disabled');
 			var form_data = $(this).serialize();
 			$.ajax({
-				url:"actioncustomer.php",
+				url:"actionuser.php",
 				method:"POST",
 				data:form_data,
 				success:function(data)
@@ -275,24 +261,22 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '.edit', function(){
-		var CID = $(this).attr('CID');
+		var UserID = $(this).attr('UserID');
 		var action = 'fetch_single';
 		$.ajax({
-			url:"actioncustomer.php",
+			url:"actionuser.php",
 			method:"POST",
-			data:{CID:CID, action:action},
+			data:{UserID:UserID, action:action},
 			dataType:"json",
 			success:function(data)
 			{
-				$('#SNAME').val(data.SNAME);
-				$('#CNAME').val(data.CNAME);
-				$('#CNUMBER').val(data.CNUMBER);
-				$('#ADDRESS').val(data.ADDRESS);
-				$('#AREA').val(data.AREA);
-				$('#COORDINATES').val(data.COORDINATES);
+				$('#USERNAME').val(data.USERNAME);
+				$('#PASSWORD').val(data.PASSWORD);
+				$('#ACTIVE').val(data.ACTIVE);
+				$('#SName').val(data.SName);
 				$('#user_dialog').attr('title', 'Edit Data');
 				$('#action').val('update');
-				$('#hidden_CID').val(CID);
+				$('#hidden_UserID').val(UserID);
 				$('#form_action').val('Update');
 				$('#user_dialog').dialog('open');
 			}
@@ -304,12 +288,12 @@ $(document).ready(function(){
 		modal: true,
 		buttons:{
 			Ok : function(){
-				var CID = $(this).data('CID');
+				var UserID = $(this).data('UserID');
 				var action = 'delete';
 				$.ajax({
-					url:"actioncustomer.php",
+					url:"actionuser.php",
 					method:"POST",
-					data:{CID:CID, action:action},
+					data:{UserID:UserID, action:action},
 					success:function(data)
 					{
 						$('#delete_confirmation').dialog('close');
@@ -326,8 +310,8 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '.delete', function(){
-		var CID = $(this).attr("CID");
-		$('#delete_confirmation').data('CID', CID).dialog('open');
+		var UserID = $(this).attr("UserID");
+		$('#delete_confirmation').data('UserID', UserID).dialog('open');
 	});
 	
 });  
