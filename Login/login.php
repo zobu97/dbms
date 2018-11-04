@@ -2,16 +2,17 @@
    include("../connection.php");
    session_start();
    $error = '';
+
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
       
-      $myusername = mysqli_real_escape_string($conn,$_POST['username']);
+      $myusername = mysqli_real_escape_string($conn,$_POST['USERNAME']);
       $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
       
-      $sql = "SELECT UserID, ACTIVE, FROM user WHERE binary UserID = '$myusername' and binary PASSWORD = '$mypassword'";
+      $sql = "SELECT UserID FROM user WHERE binary UserID = '$myusername' and binary PASSWORD = '$mypassword'";
      
       $result = mysqli_query($conn,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $row = mysqli_fetch_array($result);
     //   $active = $row['active'];
       
       $count = mysqli_num_rows($result);
