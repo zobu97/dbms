@@ -157,7 +157,7 @@ $(document).ready(function(){
 	
 		if($('#SName').val() == '')
 		{
-			error_CID = 'SalesPerson Name is required';
+			error_SName = 'SalesPerson Name is required';
 			$('#error_SName').text(error_SName);
 			$('#SName').css('border-color', '#cc0000');
 		}

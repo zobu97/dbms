@@ -57,7 +57,7 @@ li a:hover:not(.active) {
 		<script src="jquery.min.js"></script>  
 		<script src="jquery-ui.js"></script>
 		<!-- <link rel="stylesheet" type="text/css" href="style1.css"> -->
-        <script>
+        <!-- <script>
         var ajax_c = new XMLHttpRequest();
 				var method_c = "GET";
 				var async_c = true;
@@ -73,7 +73,7 @@ li a:hover:not(.active) {
 						$('#SName').append('<option SPERSONID="' + data[a].SPERSONID + '">' + data[a].SPERSONID+'</option>');
 					}
 					
-				}}; </script>
+				}}; </script> -->
 
 		
     </head>  
@@ -117,8 +117,8 @@ li a:hover:not(.active) {
 				</div>
 				<div class="form-group">
 					<label>Enter Salesperson</label>
-					<!-- <input type="text" name="SALESPERSON" id="SALESPERSON" class="form-control" /> -->
-                    <td><select id="SName"><option></option></select required></td>
+					<input type="text" name="SName" id="SName" class="form-control" />
+                    <!-- <td><select id="SName"><option></option></select required></td> -->
 					<span id="error_SName" class="text-danger"></span>
 				</div>
 				
@@ -226,7 +226,7 @@ $(document).ready(function(){
 		else
 		{
 			error_SName = '';
-			$('#error_SName').text(error_SALESPERSON);
+			$('#error_SName').text(error_SName);
 			$('#SName').css('border-color', '');
 		}
 		

@@ -8,7 +8,7 @@
       $myusername = mysqli_real_escape_string($conn,$_POST['username']);
       $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
       
-      $sql = "SELECT UserID, ACTIVE, SALESPERSON FROM user WHERE binary UserID = '$myusername' and binary PASSWORD = '$mypassword'";
+      $sql = "SELECT UserID, ACTIVE, FROM user WHERE binary UserID = '$myusername' and binary PASSWORD = '$mypassword'";
      
       $result = mysqli_query($conn,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -18,7 +18,7 @@
       
       // If result matched $myusername and $mypassword, table row must be 1 row
 		
-      if($count == 1        ) {
+      if($count == 1 ) {
         //  session_register("myusername");
          $_SESSION['login_user'] = $myusername;
          
@@ -26,7 +26,7 @@
       }else {
          $error = "Your Login Name or Password is invalid";
       }
-   }
+   } 
 ?>
 <html>
    
@@ -42,7 +42,7 @@
             <h1 style="background:black;width:25%;color:FF5722;border-radius: 10px 10px 0px 0px;">LOGIN</h1>
             <form action = "" method = "post">
                   <label>User Name</label><br>
-                  <input type = "text" name = "username" class = "box" autocomplete="off"/><br /><br />
+                  <input type = "text" name = "USERNAME" class = "box" autocomplete="off"/><br /><br />
                   <label>Password</label><br>
                   <input type = "password" name = "password" class = "box" autocomplete="off"/><br/><br />
                   <input type = "submit" value = " Submit "/><br />

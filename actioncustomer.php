@@ -65,7 +65,7 @@ if(isset($_POST["action"]))
 		ADDRESS = '".$_POST["ADDRESS"]."' , 
 		AREA = '".$_POST["AREA"]."' , 
 		COORDINATES = '".$_POST["COORDINATES"]."' , 
-		WHERE CID = '".$_POST["hidden_CID"]."'
+		WHERE CID = '".$_POST["CID"]."'
 		";
 		$statement = $connect->prepare($query);
 		$statement->execute();
