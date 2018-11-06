@@ -56,12 +56,13 @@ li a:hover:not(.active) {
         <link rel="stylesheet" href="bootstrap.min.css" />
 		<script src="jquery.min.js"></script>  
 		<script src="jquery-ui.js"></script>
-		<!-- <link rel="stylesheet" type="text/css" href="style1.css"> -->
-        <!-- <script>
+		<link rel="stylesheet" type="text/css" href="style1.css">
+		<script>
+
         var ajax_c = new XMLHttpRequest();
 				var method_c = "GET";
 				var async_c = true;
-				var url_c = "/SName/salesperson_13221.php";
+				var url_c = "sales.php";
 
 				ajax_c.open(method_c, url_c, async_c);
 				ajax_c.send();
@@ -70,10 +71,14 @@ li a:hover:not(.active) {
 				if(this.readyState == 4  && this.status == 200){
 					var data = JSON.parse(this.responseText);
 					for(var a= 0; a< data.length; a++){
-						$('#SName').append('<option SPERSONID="' + data[a].SPERSONID + '">' + data[a].SPERSONID+'</option>');
+						// alert("dgs");
+						
+						$('#SName').append('<option SName="' + data[a].SName + '">' + data[a].SName+'</option>');
+						// $('#SName').append('<option SPERSONID="' + data[a].SPERSONID + '">' + data[a].SPERSONID+'</option>');
+						
 					}
 					
-				}}; </script> -->
+				}}; </script>
 
 		
     </head>  
@@ -112,13 +117,15 @@ li a:hover:not(.active) {
                     <select name="ACTIVE" id="ACTIVE" class="form-control">
                     <option value="YES">YES</option>  
                     <option value="NO">NO</option>
-                    </select>
+     
+	                </select>
 					<span id="error_ACTIVE" class="text-danger"></span>
 				</div>
 				<div class="form-group">
 					<label>Enter Salesperson</label>
-					<input type="text" name="SName" id="SName" class="form-control" />
-                    <!-- <td><select id="SName"><option></option></select required></td> -->
+					<!-- <input type="text" name="SName" id="SName" class="form-control" /> -->
+					<!-- name= SName is required for $_POST['SName']  to work ZUBO commenting is good, see you learned the use of name, (i too just learned it btw)  -->
+                    <td><select name="SName" id="SName" class="form-control"><option></option></select required></td>
 					<span id="error_SName" class="text-danger"></span>
 				</div>
 				
